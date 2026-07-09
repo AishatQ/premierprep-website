@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PremierPrep Academy | From Learning to Earning</title>
+<meta name="description" content="PremierPrep Academy equips Africans with practical digital skills, AI proficiency, and career support to launch remote careers. Digital Marketing, Brand Design, and Virtual Assistance programs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   PremierPrep Academy — Design System (Brand-aligned)
+   Palette: Ink #111111 / Orange #E4572E / Tan #E7D6C1 / Paper #FAF7F2 / Grey #6B6B6B
+   Type: Inter (Light / Regular / Medium / Bold) — single family per brand guide
+   Tagline: "From Learning to Earning."
+   ========================================================================== */
+
+:root{
+  --ink:#111111;
+  --ink-soft:#4A4A4A;
+  --ink-faint:#6B6B6B;
+  --paper:#FAF7F2;
+  --paper-dim:#F2EBDD;
+  --paper-card:#FFFFFF;
+  --tan:#E7D6C1;
+  --tan-deep:#CBA97C;
+  --orange:#E4572E;
+  --orange-deep:#B8431F;
+  --grey:#6B6B6B;
+  --line:rgba(17,17,17,0.13);
+  --line-soft:rgba(17,17,17,0.08);
+  --shadow:0 12px 32px rgba(17,17,17,0.10);
+  --radius:14px;
+  --max:1180px;
+  --font:'Inter', system-ui, -apple-system, sans-serif;
+  --font-display:'Inter', system-ui, sans-serif;
+  --font-body:'Inter', system-ui, sans-serif;
+  --font-mono:'Inter', system-ui, sans-serif;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:16px;
+  font-weight:400;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+ul{margin:0;padding:0;list-style:none;}
+h1,h2,h3,h4{
+  font-family:var(--font-display);
+  font-weight:700;
+  line-height:1.1;
+  margin:0 0 .5em;
+  letter-spacing:-0.01em;
+}
+p{margin:0 0 1em;}
+.container{max-width:var(--max);margin:0 auto;padding:0 28px;}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+}
+
+/* ---------- Eyebrow / labels ---------- */
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:12.5px;
+  font-weight:600;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--orange-deep);
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:14px;
+}
+.eyebrow::before{
+  content:"";
+  width:18px;height:2px;
+  background:var(--orange);
+}
+
+/* ---------- Header / Nav ---------- */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(250,247,242,0.92);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line-soft);
+}
+.nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:15px 28px;max-width:var(--max);margin:0 auto;
+}
+.brand{
+  font-family:var(--font-display);
+  font-weight:800;font-size:19px;letter-spacing:-0.01em;
+  display:flex;align-items:center;gap:9px;
+}
+.brand-word-1{color:var(--ink);}
+.brand-word-2{color:var(--orange);}
+.brand-mark{
+  width:28px;height:28px;
+  position:relative;flex:none;
+}
+.brand-mark svg{width:100%;height:100%;}
+.nav-links{display:flex;align-items:center;gap:30px;}
+.nav-links a{
+  font-size:14.5px;font-weight:500;color:var(--ink-soft);
+  position:relative;padding:4px 0;
+}
+.nav-links a:hover{color:var(--ink);}
+.nav-links a.active{color:var(--ink);font-weight:600;}
+.nav-links a.active::after{
+  content:"";position:absolute;left:0;right:0;bottom:-3px;height:2px;background:var(--orange);
+}
+.nav-cta{
+  background:var(--orange);color:#fff !important;
+  padding:10px 20px;border-radius:100px;font-weight:600 !important;
+  font-size:14px !important;
+}
+.nav-cta:hover{background:var(--orange-deep);}
+.nav-toggle{display:none;background:none;border:0;cursor:pointer;padding:6px;}
+.nav-toggle span{display:block;width:22px;height:2px;background:var(--ink);margin:5px 0;}
+
+@media (max-width:860px){
+  .nav-toggle{display:block;}
+  .nav-links{
+    position:fixed;inset:64px 0 0 0;background:var(--paper);
+    flex-direction:column;align-items:flex-start;padding:24px 28px;gap:20px;
+    transform:translateY(-8px);opacity:0;pointer-events:none;transition:.2s ease;
+    border-top:1px solid var(--line-soft);
+  }
+  .nav-links.open{transform:translateY(0);opacity:1;pointer-events:auto;}
+  .nav-links a{font-size:18px;}
+}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-body);font-weight:600;font-size:15px;
+  padding:13px 24px;border-radius:100px;border:1px solid transparent;
+  cursor:pointer;transition:transform .15s ease, background .15s ease, border-color .15s ease;
+}
+.btn:hover{transform:translateY(-1px);}
+.btn-primary{background:var(--orange);color:#fff;}
+.btn-primary:hover{background:var(--orange-deep);}
+.btn-dark{background:var(--ink);color:var(--paper);}
+.btn-dark:hover{background:#000;}
+.btn-outline{background:transparent;border-color:var(--line);color:var(--ink);}
+.btn-outline:hover{border-color:var(--ink);}
+.btn-full{width:100%;justify-content:center;}
+.btn svg{width:16px;height:16px;flex:none;}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+
+/* ---------- Hero ---------- */
+.hero{padding:80px 0 60px;position:relative;overflow:hidden;}
+.hero-inner{max-width:760px;}
+.hero h1{font-size:clamp(36px,5.2vw,60px);}
+.hero .lede{font-size:18.5px;color:var(--ink-soft);max-width:52ch;margin-bottom:30px;}
+.hero-cta-row{display:flex;gap:14px;flex-wrap:wrap;}
+
+/* ---------- Sections ---------- */
+.section{padding:84px 0;}
+.section-tight{padding:52px 0;}
+.section-head{max-width:640px;margin-bottom:46px;}
+.section-head h2{font-size:clamp(28px,3.6vw,40px);}
+.section-head p{color:var(--ink-soft);font-size:17px;}
+.bg-ink{background:var(--ink);color:var(--paper);}
+.bg-ink .ink-soft-on-dark{color:rgba(250,247,242,.68);}
+.bg-tan{background:var(--paper-dim);}
+.divider{height:1px;background:var(--line-soft);}
+
+/* ---------- Promise grid ---------- */
+.promise-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:var(--radius);overflow:hidden;}
+.promise-item{background:var(--paper-card);padding:30px 26px;}
+.promise-item .num{font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--orange);margin-bottom:14px;display:block;}
+.promise-item h3{font-size:18px;margin-bottom:8px;}
+.promise-item p{color:var(--ink-soft);font-size:14.5px;margin:0;}
+@media (max-width:760px){.promise-grid{grid-template-columns:1fr;}}
+
+/* ---------- Feature icon row (brand icon style) ---------- */
+.feature-row{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;}
+@media (max-width:820px){.feature-row{grid-template-columns:1fr 1fr;}}
+.feature-item svg{width:26px;height:26px;stroke:var(--ink);stroke-width:1.6;fill:none;margin-bottom:14px;}
+.feature-item h4{font-size:15.5px;margin-bottom:6px;}
+.feature-item p{font-size:13.5px;color:var(--ink-soft);margin:0;}
+
+/* ---------- Program cards ---------- */
+.program-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+@media (max-width:940px){.program-grid{grid-template-columns:1fr;}}
+.program-card{
+  background:var(--paper-card);border:1px solid var(--line-soft);border-radius:var(--radius);
+  padding:28px 26px;display:flex;flex-direction:column;gap:14px;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.program-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);}
+.program-tag{
+  display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);
+  font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  padding:5px 10px;border-radius:100px;width:fit-content;
+  background:var(--tan);color:var(--orange-deep);
+}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--orange);}
+.program-card h3{font-size:21px;}
+.program-card p{color:var(--ink-soft);font-size:14.5px;flex:1;}
+.program-card .skills{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 4px;}
+.program-card .skills span{
+  font-size:12px;font-family:var(--font-mono);color:var(--ink-soft);
+  border:1px solid var(--line);border-radius:100px;padding:3px 9px;
+}
+.price-line{display:flex;align-items:baseline;gap:10px;margin:2px 0 4px;}
+.price-line .was{font-family:var(--font-mono);font-size:14px;color:var(--ink-faint);text-decoration:line-through;}
+.price-line .now{font-family:var(--font-display);font-size:22px;font-weight:800;color:var(--ink);}
+.price-line .save{font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:var(--orange-deep);background:var(--tan);padding:2px 8px;border-radius:100px;}
+.program-card .card-cta{display:flex;align-items:center;gap:6px;font-weight:600;font-size:14.5px;margin-top:auto;color:var(--orange-deep);}
+.program-card .card-cta svg{width:15px;height:15px;transition:transform .15s;}
+.program-card:hover .card-cta svg{transform:translateX(3px);}
+
+/* ---------- Timeline / Journey (vertical steps) ---------- */
+.timeline-row{
+  display:grid;grid-template-columns:120px 1fr;gap:24px;
+  padding:26px 0;border-top:1px solid var(--line-soft);
+}
+.timeline-row:last-child{border-bottom:1px solid var(--line-soft);}
+.timeline-week{font-family:var(--font-mono);font-size:13px;color:var(--orange-deep);font-weight:600;}
+.timeline-row h4{font-size:17px;margin-bottom:6px;}
+.timeline-row p{color:var(--ink-soft);font-size:14.5px;margin:0;}
+@media (max-width:640px){.timeline-row{grid-template-columns:1fr;gap:6px;}}
+
+.journey{position:relative;padding-left:44px;}
+.journey::before{content:"";position:absolute;left:13px;top:6px;bottom:6px;width:2px;background:var(--line);}
+.journey-step{position:relative;padding-bottom:34px;}
+.journey-step:last-child{padding-bottom:0;}
+.journey-step::before{
+  content:"";position:absolute;left:-44px;top:2px;width:28px;height:28px;border-radius:50%;
+  background:var(--paper-card);border:2px solid var(--orange);
+}
+.journey-step::after{
+  content:"";position:absolute;left:-35px;top:11px;width:10px;height:10px;border-radius:50%;background:var(--orange);
+}
+.journey-step h4{font-size:16.5px;margin-bottom:4px;}
+.journey-step p{font-size:14px;color:var(--ink-soft);margin:0;}
+.journey-step .step-n{font-family:var(--font-mono);font-size:11px;color:var(--ink-faint);font-weight:600;margin-bottom:2px;display:block;}
+
+/* ---------- Stats strip ---------- */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:var(--radius);overflow:hidden;}
+.stat{background:var(--paper-card);padding:26px 22px;}
+.stat .n{font-family:var(--font-display);font-size:32px;font-weight:800;color:var(--orange-deep);}
+.stat .l{font-size:13px;color:var(--ink-soft);}
+@media (max-width:760px){.stats{grid-template-columns:1fr 1fr;}}
+
+/* ---------- Cards / lists ---------- */
+.check-list li{
+  display:flex;gap:10px;align-items:flex-start;padding:9px 0;font-size:15px;color:var(--ink-soft);
+}
+.check-list li svg{flex:none;width:17px;height:17px;margin-top:2px;color:var(--orange);}
+
+/* ---------- Pricing card ---------- */
+.price-card{
+  background:var(--ink);color:var(--paper);border-radius:18px;padding:34px 30px;
+  position:sticky;top:96px;
+}
+.price-card .price-line{align-items:baseline;}
+.price-card .price-line .was{color:rgba(250,247,242,.45);}
+.price-card .price-line .now{color:#fff;font-size:34px;}
+.price-card .price-line .save{background:var(--orange);color:#fff;}
+.price-card .note{font-size:13px;color:rgba(250,247,242,.6);margin-top:4px;}
+.price-card .divider-dark{height:1px;background:rgba(250,247,242,.16);margin:22px 0;}
+.price-card .check-list li{color:rgba(250,247,242,.82);}
+.price-card .check-list li svg{color:var(--orange);}
+.selar-note{
+  margin-top:18px;font-size:12.5px;color:rgba(250,247,242,.55);
+  border:1px dashed rgba(250,247,242,.28);border-radius:10px;padding:12px 14px;
+}
+
+/* ---------- Forms ---------- */
+.form-card{background:var(--paper-card);border:1px solid var(--line-soft);border-radius:var(--radius);padding:34px;}
+.field{margin-bottom:20px;}
+.field label{display:block;font-size:13.5px;font-weight:600;margin-bottom:7px;}
+.field .hint{font-size:12.5px;color:var(--ink-faint);margin-top:5px;}
+.field input, .field select, .field textarea{
+  width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:9px;
+  background:var(--paper);font-family:var(--font-body);font-size:15px;color:var(--ink);
+}
+.field input:focus, .field select:focus, .field textarea:focus{
+  outline:none;border-color:var(--orange);box-shadow:0 0 0 3px rgba(228,87,46,.14);
+}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+@media (max-width:600px){.field-row{grid-template-columns:1fr;}}
+.radio-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+@media (max-width:700px){.radio-cards{grid-template-columns:1fr;}}
+.radio-card{position:relative;}
+.radio-card input{position:absolute;opacity:0;inset:0;cursor:pointer;margin:0;width:100%;height:100%;}
+.radio-card .box{
+  border:1.5px solid var(--line);border-radius:10px;padding:14px;font-size:14px;font-weight:600;
+  display:flex;align-items:center;gap:9px;
+}
+.radio-card input:checked + .box{border-color:var(--orange);background:rgba(228,87,46,.06);}
+
+/* ---------- Footer ---------- */
+.site-footer{background:var(--ink);color:var(--paper);padding:60px 0 30px;}
+.footer-brand-lockup{margin-bottom:14px;}
+.footer-brand-lockup .word{font-family:var(--font-display);font-weight:800;font-size:21px;}
+.footer-brand-lockup .word .w1{color:#fff;}
+.footer-brand-lockup .word .w2{color:var(--orange);}
+.footer-brand-lockup .sub{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.2em;color:rgba(250,247,242,.5);margin-top:2px;}
+.footer-tagline{color:var(--orange);font-size:13.5px;font-weight:500;margin-top:8px;}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px;}
+@media (max-width:800px){.footer-grid{grid-template-columns:1fr 1fr;}}
+.footer-grid h4{font-size:13px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.08em;color:rgba(250,247,242,.55);margin-bottom:16px;font-weight:600;}
+.footer-grid ul li{padding:6px 0;}
+.footer-grid a{color:rgba(250,247,242,.82);font-size:14.5px;}
+.footer-grid a:hover{color:var(--orange);}
+.footer-bottom{
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+  padding-top:28px;border-top:1px solid rgba(250,247,242,.14);
+  font-size:13px;color:rgba(250,247,242,.5);
+}
+
+/* ---------- Reveal on scroll ---------- */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* ---------- Page header (interior pages) ---------- */
+.page-head{padding:60px 0 36px;}
+.page-head .eyebrow{margin-bottom:16px;}
+.page-head h1{font-size:clamp(32px,4.6vw,50px);max-width:20ch;}
+.page-head p{font-size:17px;color:var(--ink-soft);max-width:56ch;}
+.breadcrumb{font-family:var(--font-mono);font-size:12.5px;color:var(--ink-faint);margin-bottom:20px;}
+.breadcrumb a:hover{color:var(--ink);}
+
+.tag-pill{
+  display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);
+  font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--orange-deep);
+  background:var(--tan);
+  padding:6px 12px;border-radius:100px;
+}
+.underline-accent{text-decoration:underline;text-decoration-color:var(--orange);text-decoration-thickness:3px;text-underline-offset:4px;}
+
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="brand">
+      <span class="brand-mark"><svg viewBox="0 0 32 32"><path d="M9 3h9.5a7 7 0 010 14H14v12H9V3z" fill="#111111"/><path d="M9 15.5L16 10v7.5L9 23V15.5z" fill="#E4572E"/></svg></span>
+      <span class="brand-word-1">Premier</span><span class="brand-word-2">Prep</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="programs.html">Programs</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="enroll.html" class="nav-cta">Enroll now</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="eyebrow">From Learning to Earning</div>
+      <h1>Skip the theory. Graduate with a portfolio, a plan, and a way to earn from it.</h1>
+      <p class="lede">We equip Africans with practical digital skills, AI proficiency, and career support to launch remote careers, not certificates that sit in a folder.</p>
+      <div class="hero-cta-row">
+        <a href="enroll.html" class="btn btn-primary">Enroll for the next cohort</a>
+        <a href="programs.html" class="btn btn-outline">See the programs</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section-tight">
+    <div class="container">
+      <div class="feature-row reveal">
+        <div class="feature-item">
+          <svg viewBox="0 0 24 24"><path d="M4 5c3-1.5 6-1.5 8 0v14c-2-1.5-5-1.5-8 0V5z"/><path d="M20 5c-3-1.5-6-1.5-8 0v14c2-1.5 5-1.5 8 0V5z"/></svg>
+          <h4>Practical learning</h4>
+          <p>Learn by doing, with real projects from day one.</p>
+        </div>
+        <div class="feature-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+          <h4>AI-powered skills</h4>
+          <p>Master the AI tools your profession runs on now.</p>
+        </div>
+        <div class="feature-item">
+          <svg viewBox="0 0 24 24"><path d="M4 7h16v13H4z"/><path d="M9 7V4h6v3"/></svg>
+          <h4>Career support</h4>
+          <p>Get mentorship and support finding real opportunities.</p>
+        </div>
+        <div class="feature-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.7 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.7-3.8-9S9.5 5.5 12 3z"/></svg>
+          <h4>Global opportunities</h4>
+          <p>Access remote jobs and freelance work worldwide.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container"><div class="divider"></div></div>
+
+  <!-- PROMISE -->
+  <section class="section-tight">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">What you leave with</div>
+        <h2>Every cohort ends the same way: proof, not promises.</h2>
+        <p>Skills fade if there's nothing to show for them. Every student graduates with the six things that actually move a job search or a client pitch forward.</p>
+      </div>
+      <div class="promise-grid reveal">
+        <div class="promise-item"><span class="num">01</span><h3>Practical skills</h3><p>Built by doing the work, not memorising slides.</p></div>
+        <div class="promise-item"><span class="num">02</span><h3>A live portfolio</h3><p>Real projects you can show a client on day one after graduation.</p></div>
+        <div class="promise-item"><span class="num">03</span><h3>An optimised CV</h3><p>Rewritten to pass both a recruiter's eye and an ATS scan.</p></div>
+        <div class="promise-item"><span class="num">04</span><h3>A polished LinkedIn</h3><p>Positioned so opportunities find you between applications.</p></div>
+        <div class="promise-item"><span class="num">05</span><h3>AI proficiency</h3><p>The tools and prompts that are now table stakes in your field.</p></div>
+        <div class="promise-item"><span class="num">06</span><h3>Career support</h3><p>Interview prep, freelancing groundwork, and a plan for what's next.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMS -->
+  <section class="section bg-tan">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Choose your track</div>
+        <h2>Three programs. Pick the one that fits.</h2>
+        <p>Every track runs on the same rigour, the same 8-week structure, and the same standard of tutoring, whichever skill you choose to specialise in.</p>
+      </div>
+
+      <div class="program-grid reveal">
+        <a href="program-digital-marketing.html" class="program-card">
+          <span class="program-tag"><span class="dot"></span>Digital Marketing</span>
+          <h3>Digital Marketing Career Program</h3>
+          <p>Plan, write, and run campaigns across content, social, and email, then read the analytics that tell you what's working.</p>
+          <div class="price-line"><span class="was">₦80,000</span><span class="now">₦30,000</span><span class="save">Launch price</span></div>
+          <div class="skills"><span>Content</span><span>Social</span><span>Copywriting</span><span>Analytics</span></div>
+          <span class="card-cta">View curriculum <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+        </a>
+
+        <a href="program-brand-design.html" class="program-card">
+          <span class="program-tag"><span class="dot"></span>Brand Design</span>
+          <h3>Brand Design Career Program</h3>
+          <p>Build brand identities and visual systems clients trust on sight, using the same process working design studios follow.</p>
+          <div class="price-line"><span class="was">₦80,000</span><span class="now">₦30,000</span><span class="save">Launch price</span></div>
+          <div class="skills"><span>Identity</span><span>Visual Systems</span><span>Design Tools</span></div>
+          <span class="card-cta">View curriculum <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+        </a>
+
+        <a href="program-virtual-assistant.html" class="program-card">
+          <span class="program-tag"><span class="dot"></span>Virtual Assistance</span>
+          <h3>Virtual Assistance Career Program</h3>
+          <p>Run the operational side of a remote business: calendars, inboxes, tools, and client communication, handled properly.</p>
+          <div class="price-line"><span class="was">₦80,000</span><span class="now">₦30,000</span><span class="save">Launch price</span></div>
+          <div class="skills"><span>Admin Systems</span><span>Client Ops</span><span>Tools Stack</span></div>
+          <span class="card-cta">View curriculum <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHARED MODULES -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Every student, every track</div>
+        <h2>The two modules that make PremierPrep different.</h2>
+      </div>
+      <div class="promise-grid reveal" style="grid-template-columns:1fr 1fr;">
+        <div class="promise-item">
+          <span class="num">Shared module</span>
+          <h3>AI for Work</h3>
+          <p>Prompt writing, AI-assisted research, productivity workflows, automation, AI ethics, and the specific tools used in your profession.</p>
+        </div>
+        <div class="promise-item">
+          <span class="num">Shared module</span>
+          <h3>Career Accelerator</h3>
+          <p>CV writing, LinkedIn optimisation, portfolio building, networking, interview prep, freelancing, client acquisition, and personal branding.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEAD MAGNET -->
+  <section class="section-tight">
+    <div class="container">
+      <div class="form-card reveal" style="display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap;">
+        <div style="max-width:480px;">
+          <div class="eyebrow">Free download</div>
+          <h3 style="font-size:24px;margin-bottom:8px;">The Remote Career Starter Kit</h3>
+          <p style="color:var(--ink-soft);margin:0;">50 AI tools, a CV checklist, and a first-90-days plan for landing remote work, before you enroll in anything.</p>
+        </div>
+        <form style="display:flex;gap:10px;flex-wrap:wrap;min-width:280px;flex:1;" onsubmit="return false;">
+          <input type="email" placeholder="you@email.com" style="flex:1;min-width:200px;padding:13px 16px;border:1px solid var(--line);border-radius:100px;font-family:var(--font-body);font-size:14.5px;" required>
+          <button class="btn btn-dark" type="submit">Send it to me</button>
+        </form>
+      </div>
+      <p style="font-size:12.5px;color:var(--ink-faint);margin-top:10px;">Placeholder form. Connect to your email tool (Mailchimp, Google Sheets, etc.) before launch.</p>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="reveal" style="background:var(--orange);border-radius:20px;padding:56px 48px;color:#fff;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;">
+        <div style="max-width:460px;">
+          <h2 style="color:#fff;font-size:30px;margin-bottom:10px;">Enrollment for the next cohort is open.</h2>
+          <p style="color:rgba(255,255,255,.86);margin:0;">30 to 50 seats. We'd rather deliver an exceptional cohort than a crowded one.</p>
+        </div>
+        <a href="enroll.html" class="btn btn-dark">Start your enrollment</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-lockup">
+          <div class="word"><span class="w1">Premier</span><span class="w2">Prep</span></div>
+          <div class="sub">A C A D E M Y</div>
+        </div>
+        <p class="footer-tagline">From Learning to Earning.</p>
+        <p style="color:rgba(250,247,242,.65);font-size:14.5px;max-width:32ch;margin-top:10px;">We equip Africans with practical digital skills, AI proficiency, and career support to launch remote careers.</p>
+      </div>
+      <div>
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="program-digital-marketing.html">Digital Marketing</a></li>
+          <li><a href="program-brand-design.html">Brand Design</a></li>
+          <li><a href="program-virtual-assistant.html">Virtual Assistance</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Academy</h4>
+        <ul>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="programs.html">All programs</a></li>
+          <li><a href="enroll.html">Enroll</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="mailto:hello@premierprep.academy">hello@premierprep.academy</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">WhatsApp community</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 PremierPrep Academy. All rights reserved.</span>
+      <span>Lagos, Nigeria</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// PremierPrep Academy — shared behaviour
+
+// Mainstack checkout links per program.
+const PAYMENT_LINKS = {
+  'digital-marketing': 'https://mainstack.com/p/premierprep-digital-marketing-program',
+  'brand-design': 'https://mainstack.com/p/premierprep-brand-design-program',
+  'virtual-assistant': 'https://mainstack.com/p/premierprep-virtual-assistance-program'
+};
+
+// Google Apps Script web app URL that writes enrollment form submissions into Google Sheets.
+const SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycby3SLqpcu06vO8-YNJRBAdgSHEag0YAiYf9yVPoVPu5zXqpEP4gMgutQhtuXuXCDj7iiw/exec';
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Mobile nav toggle
+  const toggle = document.querySelector('.nav-toggle');
+  const links = document.querySelector('.nav-links');
+  if (toggle && links) {
+    toggle.addEventListener('click', () => {
+      links.classList.toggle('open');
+    });
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+  }
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && revealEls.length) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in'));
+  }
+
+  // Enrollment form -> program pre-select via query string (?program=digital-marketing)
+  const params = new URLSearchParams(window.location.search);
+  const programParam = params.get('program');
+  if (programParam) {
+    const radio = document.querySelector(`input[name="program"][value="${programParam}"]`);
+    if (radio) radio.checked = true;
+  }
+
+  // Enrollment form submit -> writes to Google Sheets, then reveals payment step
+  const form = document.getElementById('enrollment-form');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalLabel = submitBtn ? submitBtn.textContent : '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+      }
+
+      const formData = new FormData(form);
+
+      fetch(SHEETS_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData
+      })
+        .then(() => {
+          const selected = form.querySelector('input[name="program"]:checked');
+          const payBtn = document.getElementById('pay-now-btn');
+          if (selected && payBtn && PAYMENT_LINKS[selected.value]) {
+            payBtn.href = PAYMENT_LINKS[selected.value];
+          }
+          const confirmBox = document.getElementById('form-success');
+          form.style.display = 'none';
+          if (confirmBox) confirmBox.style.display = 'block';
+          window.scrollTo({ top: form.offsetTop - 120, behavior: 'smooth' });
+        })
+        .catch(() => {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalLabel;
+          }
+          alert("Something went wrong submitting your enrollment. Please try again, or reach out to us directly if it keeps happening.");
+        });
+    });
+  }
+});
+
+</script>
+</body>
+</html>
