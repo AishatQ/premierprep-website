@@ -378,7 +378,6 @@ p{margin:0 0 1em;}
 
       <form id="enrollment-form" class="form-card reveal">
         <h2 style="font-size:20px;margin-bottom:6px;">Enrollment form</h2>
-        <p style="color:var(--ink-soft);font-size:14.5px;margin-bottom:28px;">Placeholder form. Swap this for your live Google Form or LMS enrollment link before launch. See the note at the bottom of this page.</p>
 
         <div class="field-row">
           <div class="field">
@@ -428,7 +427,7 @@ p{margin:0 0 1em;}
           </div>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-full">Continue to payment</button>
+        <button type="submit" class="btn btn-primary btn-full">Enroll Now</button>
       </form>
 
       <div id="form-success" class="form-card reveal" style="display:none;text-align:center;">
@@ -438,10 +437,6 @@ p{margin:0 0 1em;}
         <h2 style="font-size:22px;margin-bottom:8px;">You're almost in.</h2>
         <p style="color:var(--ink-soft);margin-bottom:24px;">One last step: complete payment to secure your seat. You'll get a welcome email right after, with your WhatsApp community invite and Google Classroom link.</p>
         <a id="pay-now-btn" href="#" class="btn btn-primary">Proceed to payment</a>
-      </div>
-
-      <div class="reveal" style="margin-top:24px;padding:18px 22px;border:1px dashed var(--line);border-radius:12px;font-size:13px;color:var(--ink-faint);">
-        <strong style="color:var(--ink-soft);">Setup note:</strong> Submissions are saved to your Google Sheet automatically, and payment links route to your live Mainstack checkout pages.
       </div>
     </div>
   </section>
@@ -521,6 +516,9 @@ const PAYMENT_LINKS = {
 // Google Apps Script web app URL that writes enrollment form submissions into Google Sheets.
 const SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycby3SLqpcu06vO8-YNJRBAdgSHEag0YAiYf9yVPoVPu5zXqpEP4gMgutQhtuXuXCDj7iiw/exec';
 
+// Google Apps Script web app URL that writes lead magnet email signups into a separate Google Sheet.
+const LEAD_SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw6Zk6DG0DhYo67L6SWO_7XeF3YsxtfTUovxaysnyZvmIKPt6LmtcvfOuYbU_RS2jHvag/exec';
+
 document.addEventListener('DOMContentLoaded', () => {
   // Mobile nav toggle
   const toggle = document.querySelector('.nav-toggle');
@@ -594,6 +592,35 @@ document.addEventListener('DOMContentLoaded', () => {
           }
           alert("Something went wrong submitting your enrollment. Please try again, or reach out to us directly if it keeps happening.");
         });
+    });
+  }
+
+  // Lead magnet form submit -> writes email to Google Sheets, then shows a thank-you message
+  const leadForm = document.getElementById('lead-magnet-form');
+  if (leadForm) {
+    leadForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const submitBtn = leadForm.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+      }
+      const formData = new FormData(leadForm);
+      fetch(LEAD_SHEETS_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData
+      }).then(() => {
+        const successMsg = document.getElementById('lead-magnet-success');
+        leadForm.style.display = 'none';
+        if (successMsg) successMsg.style.display = 'block';
+      }).catch(() => {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send it to me';
+        }
+        alert("Something went wrong. Please try again.");
+      });
     });
   }
 });
