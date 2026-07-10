@@ -414,7 +414,6 @@ p{margin:0 0 1em;}
         </ul>
         <div class="divider-dark"></div>
         <a href="enroll.html?program=virtual-assistant" class="btn btn-primary btn-full">Enroll now</a>
-        <div class="selar-note">Payment happens as part of enrollment, via Mainstack secure checkout.</div>
       </div>
     </div>
   </section>
@@ -484,6 +483,9 @@ const PAYMENT_LINKS = {
 
 // Google Apps Script web app URL that writes enrollment form submissions into Google Sheets.
 const SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycby3SLqpcu06vO8-YNJRBAdgSHEag0YAiYf9yVPoVPu5zXqpEP4gMgutQhtuXuXCDj7iiw/exec';
+
+// Google Apps Script web app URL that writes lead magnet email signups into a separate Google Sheet.
+const LEAD_SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw6Zk6DG0DhYo67L6SWO_7XeF3YsxtfTUovxaysnyZvmIKPt6LmtcvfOuYbU_RS2jHvag/exec';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Mobile nav toggle
@@ -558,6 +560,35 @@ document.addEventListener('DOMContentLoaded', () => {
           }
           alert("Something went wrong submitting your enrollment. Please try again, or reach out to us directly if it keeps happening.");
         });
+    });
+  }
+
+  // Lead magnet form submit -> writes email to Google Sheets, then shows a thank-you message
+  const leadForm = document.getElementById('lead-magnet-form');
+  if (leadForm) {
+    leadForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const submitBtn = leadForm.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+      }
+      const formData = new FormData(leadForm);
+      fetch(LEAD_SHEETS_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData
+      }).then(() => {
+        const successMsg = document.getElementById('lead-magnet-success');
+        leadForm.style.display = 'none';
+        if (successMsg) successMsg.style.display = 'block';
+      }).catch(() => {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send it to me';
+        }
+        alert("Something went wrong. Please try again.");
+      });
     });
   }
 });
