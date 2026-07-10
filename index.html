@@ -499,12 +499,12 @@ p{margin:0 0 1em;}
           <h3 style="font-size:24px;margin-bottom:8px;">The Remote Career Starter Kit</h3>
           <p style="color:var(--ink-soft);margin:0;">50 AI tools, a CV checklist, and a first-90-days plan for landing remote work, before you enroll in anything.</p>
         </div>
-        <form style="display:flex;gap:10px;flex-wrap:wrap;min-width:280px;flex:1;" onsubmit="return false;">
-          <input type="email" placeholder="you@email.com" style="flex:1;min-width:200px;padding:13px 16px;border:1px solid var(--line);border-radius:100px;font-family:var(--font-body);font-size:14.5px;" required>
+        <form id="lead-magnet-form" style="display:flex;gap:10px;flex-wrap:wrap;min-width:280px;flex:1;">
+          <input type="email" name="email" placeholder="you@email.com" style="flex:1;min-width:200px;padding:13px 16px;border:1px solid var(--line);border-radius:100px;font-family:var(--font-body);font-size:14.5px;" required>
           <button class="btn btn-dark" type="submit">Send it to me</button>
         </form>
+        <p id="lead-magnet-success" style="display:none;color:var(--orange-deep);font-weight:600;font-size:14.5px;min-width:280px;flex:1;">You're on the list. Check your inbox shortly.</p>
       </div>
-      <p style="font-size:12.5px;color:var(--ink-faint);margin-top:10px;">Placeholder form. Connect to your email tool (Mailchimp, Google Sheets, etc.) before launch.</p>
     </div>
   </section>
 
@@ -580,6 +580,9 @@ const PAYMENT_LINKS = {
 // Google Apps Script web app URL that writes enrollment form submissions into Google Sheets.
 const SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycby3SLqpcu06vO8-YNJRBAdgSHEag0YAiYf9yVPoVPu5zXqpEP4gMgutQhtuXuXCDj7iiw/exec';
 
+// Google Apps Script web app URL that writes lead magnet email signups into a separate Google Sheet.
+const LEAD_SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw6Zk6DG0DhYo67L6SWO_7XeF3YsxtfTUovxaysnyZvmIKPt6LmtcvfOuYbU_RS2jHvag/exec';
+
 document.addEventListener('DOMContentLoaded', () => {
   // Mobile nav toggle
   const toggle = document.querySelector('.nav-toggle');
@@ -653,6 +656,35 @@ document.addEventListener('DOMContentLoaded', () => {
           }
           alert("Something went wrong submitting your enrollment. Please try again, or reach out to us directly if it keeps happening.");
         });
+    });
+  }
+
+  // Lead magnet form submit -> writes email to Google Sheets, then shows a thank-you message
+  const leadForm = document.getElementById('lead-magnet-form');
+  if (leadForm) {
+    leadForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const submitBtn = leadForm.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+      }
+      const formData = new FormData(leadForm);
+      fetch(LEAD_SHEETS_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData
+      }).then(() => {
+        const successMsg = document.getElementById('lead-magnet-success');
+        leadForm.style.display = 'none';
+        if (successMsg) successMsg.style.display = 'block';
+      }).catch(() => {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send it to me';
+        }
+        alert("Something went wrong. Please try again.");
+      });
     });
   }
 });
